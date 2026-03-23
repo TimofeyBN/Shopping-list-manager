@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/shopping_list_manager/cli"
+
+ShoppingListManager::CLI.run(ARGV)
