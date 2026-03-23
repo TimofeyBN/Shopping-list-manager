@@ -10,7 +10,7 @@
 * Удаление товаров
 * Подсчёт общей стоимости
 
----
+
 
 ##  Установка
 
@@ -20,7 +20,7 @@ cd shopping-list-manager
 bundle install
 ```
 
----
+
 
 ##  Использование
 
@@ -52,13 +52,12 @@ bundle install
 
 ```bash
 ./bin/shopping total
-```
 
----
+
 
 ##  Пример
 
-```
+
 $ ./bin/shopping add "Хлеб" --quantity 1 --price 1.2
 Добавлено: Хлеб
 
@@ -70,13 +69,13 @@ $ ./bin/shopping buy 1
 
 $ ./bin/shopping total
 Итого: 0
-```
 
----
+
+
 
 ##  Структура проекта
 
-```
+
 lib/
   shopping_list_manager/
     item.rb
@@ -85,9 +84,10 @@ lib/
 bin/
   shopping
 spec/
-```
+Gemfile
 
----
+
+
 
 ##  Технологии
 
@@ -96,8 +96,15 @@ spec/
 * JSON
 * RuboCop
 
----
+
 
 ##  Лицензия
 
 MIT
+
+
+
+##  Участники
+
+* Батраков Тимофей
+* Гаджиев Арсен
