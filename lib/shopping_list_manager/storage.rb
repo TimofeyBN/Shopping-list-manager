@@ -1,9 +1,11 @@
-require "json"
-require_relative "item"
+# frozen_string_literal: true
+
+require 'json'
+require_relative 'item'
 
 module ShoppingListManager
   class Storage
-    FILE = "data.json"
+    FILE = 'data.json'
 
     def self.load
       return [] unless File.exist?(FILE)
@@ -11,7 +13,7 @@ module ShoppingListManager
       data = JSON.parse(File.read(FILE))
       data.map { |i| Item.from_h(i) }
     rescue JSON::ParserError
-      puts "Ошибка: файл данных повреждён. Начинаем с чистого списка."
+      puts 'Ошибка: файл данных повреждён. Начинаем с чистого списка.'
       []
     end
 

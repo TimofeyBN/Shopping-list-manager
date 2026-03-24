@@ -1,7 +1,9 @@
-require "rspec"
+# frozen_string_literal: true
 
-$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
+require 'rspec'
 
-require "shopping_list_manager/item"
-require "shopping_list_manager/storage"
-require "shopping_list_manager/cli"
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+
+require 'shopping_list_manager/item'
+require 'shopping_list_manager/storage'
+require 'shopping_list_manager/cli'

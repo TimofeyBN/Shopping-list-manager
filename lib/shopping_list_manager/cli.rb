@@ -1,6 +1,8 @@
-require_relative "item"
-require_relative "storage"
-require_relative "version"
+# frozen_string_literal: true
+
+require_relative 'item'
+require_relative 'storage'
+require_relative 'version'
 
 module ShoppingListManager
   class CLI
@@ -11,31 +13,31 @@ module ShoppingListManager
       command = args.shift
 
       case command
-      when "add"
+      when 'add'
         name = args[0]
 
         unless name
-          puts "Ошибка: укажите название товара"
-          puts "Использование: shopping add <название> --quantity <кол-во> --price <цена>"
+          puts 'Ошибка: укажите название товара'
+          puts 'Использование: shopping add <название> --quantity <кол-во> --price <цена>'
           return
         end
 
-        quantity_str = extract_arg(args, "--quantity")
-        price_str    = extract_arg(args, "--price")
+        quantity_str = extract_arg(args, '--quantity')
+        price_str    = extract_arg(args, '--price')
 
         unless quantity_str && price_str
-          puts "Ошибка: нужно указать --quantity и --price"
-          puts "Использование: shopping add <название> --quantity <кол-во> --price <цена>"
+          puts 'Ошибка: нужно указать --quantity и --price'
+          puts 'Использование: shopping add <название> --quantity <кол-во> --price <цена>'
           return
         end
 
         unless quantity_str =~ /\A\d+\z/
-          puts "Ошибка: --quantity должно быть целым числом"
+          puts 'Ошибка: --quantity должно быть целым числом'
           return
         end
 
         unless price_str =~ /\A\d+(\.\d+)?\z/
-          puts "Ошибка: --price должно быть числом (например, 1.99)"
+          puts 'Ошибка: --price должно быть числом (например, 1.99)'
           return
         end
 
@@ -43,12 +45,12 @@ module ShoppingListManager
         price    = price_str.to_f
 
         if quantity <= 0
-          puts "Ошибка: количество должно быть больше 0"
+          puts 'Ошибка: количество должно быть больше 0'
           return
         end
 
         if price <= 0
-          puts "Ошибка: цена должна быть больше 0"
+          puts 'Ошибка: цена должна быть больше 0'
           return
         end
 
@@ -73,17 +75,17 @@ module ShoppingListManager
         end
 
 
-      when "list"
+      when 'list'
         if items.empty?
-          puts "Список покупок пуст. Добавьте товары командой: shopping add <название> --quantity <кол-во> --price <цена>"
+          puts 'Список покупок пуст. Добавьте товары командой: shopping add <название> --quantity <кол-во> --price <цена>'
           return
         end
 
         puts "\nСПИСОК ПОКУПОК:"
-        puts "-" * 50
+        puts '-' * 50
 
         items.each do |i|
-          status = i.bought ? "✓ Куплен" : "  Не куплен"
+          status = i.bought ? '✓ Куплен' : '  Не куплен'
           puts "#{i.id} | #{i.name} | #{i.quantity} шт | #{i.formatted_price} руб | #{status}"
         end
 
@@ -91,17 +93,17 @@ module ShoppingListManager
         total_price   = items.reject(&:bought).sum(&:total)
         bought_count  = items.count(&:bought)
 
-        puts "-" * 50
+        puts '-' * 50
         puts "Всего позиций: #{items.size} (куплено: #{bought_count})"
         puts "Общее количество: #{total_items} шт"
-        puts "К оплате: #{"%.2f" % total_price} руб"
+        puts "К оплате: #{'%.2f' % total_price} руб"
         puts
 
 
-      when "buy"
+      when 'buy'
         unless args[0]
-          puts "Ошибка: укажите ID товара"
-          puts "Использование: shopping buy <id>"
+          puts 'Ошибка: укажите ID товара'
+          puts 'Использование: shopping buy <id>'
           return
         end
 
@@ -120,10 +122,10 @@ module ShoppingListManager
         end
 
 
-      when "delete"
+      when 'delete'
         unless args[0]
-          puts "Ошибка: укажите ID товара"
-          puts "Использование: shopping delete <id>"
+          puts 'Ошибка: укажите ID товара'
+          puts 'Использование: shopping delete <id>'
           return
         end
 
@@ -138,19 +140,19 @@ module ShoppingListManager
         end
 
 
-      when "total"
+      when 'total'
         if items.empty?
-          puts "Список пуст"
+          puts 'Список пуст'
           return
         end
 
         unpaid = items.reject(&:bought)
         sum    = unpaid.sum(&:total)
 
-        puts "К оплате: #{"%.2f" % sum} руб (#{unpaid.size} из #{items.size} позиций)"
+        puts "К оплате: #{'%.2f' % sum} руб (#{unpaid.size} из #{items.size} позиций)"
 
 
-      when "help", nil
+      when 'help', nil
         print_help
 
 
@@ -162,16 +164,13 @@ module ShoppingListManager
       Storage.save(items)
     end
 
-
-    private
-
     def self.extract_arg(args, flag)
       index = args.index(flag)
       return nil unless index
 
       value = args[index + 1]
       # Убеждаемся, что значение не является другим флагом
-      return nil if value.nil? || value.start_with?("--")
+      return nil if value.nil? || value.start_with?('--')
 
       value
     end

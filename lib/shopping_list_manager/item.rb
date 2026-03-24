@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ShoppingListManager
   class Item
     attr_accessor :id, :name, :quantity, :price, :bought
@@ -15,11 +17,11 @@ module ShoppingListManager
     end
 
     def formatted_price
-      "%.2f" % price
+      '%.2f' % price
     end
 
     def formatted_total
-      "%.2f" % total
+      '%.2f' % total
     end
 
     def to_h
@@ -34,11 +36,11 @@ module ShoppingListManager
 
     def self.from_h(h)
       new(
-        id: h["id"],
-        name: h["name"],
-        quantity: h["quantity"],
-        price: h["price"],
-        bought: h["bought"]
+        id: h['id'],
+        name: h['name'],
+        quantity: h['quantity'],
+        price: h['price'],
+        bought: h['bought']
       )
     end
   end
