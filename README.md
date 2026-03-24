@@ -16,7 +16,7 @@
 
 ```
 git clone "https://github.com/TimofeyBN/Shopping-list-manager.git"
-cd shopping-list-manager
+cd Shopping-list-manager
 bundle install
 ```
 
@@ -27,7 +27,7 @@ bundle install
 ### Добавить товар
 
 ```
-bundle exec ruby bin/shopping add "Яблоки" --quantity 3 --price 2.5
+bundle exec ruby bin/shopping add "Яблоки" --quantity 3 --price 67.99
 ```
 
 ### Показать список
@@ -58,7 +58,7 @@ bundle exec ruby bin/shopping total
 ##  Пример
 
 ```cmd
- bundle exec ruby bin/shopping add "Хлеб" --quantity 1 --price 1.2
+ bundle exec ruby bin/shopping add "Хлеб" --quantity 1 --price 71.2
 Добавлено: Хлеб
 
  bundle exec ruby bin/shopping list
@@ -82,17 +82,21 @@ bundle exec ruby bin/shopping total
 ##  Структура проекта
 
 ```
+.github/
+  workflows/
+    ci.yml
+bin/
+  shopping
 lib/
   shopping_list_manager/
     item.rb
     storage.rb
     cli.rb
-bin/
-  shopping
 spec/
   spec_helper.rb
   item_spec.rb
   cli_spec.rb
+.gitignore
 Gemfile
 LICENSE
 README.md
