@@ -10,6 +10,9 @@ module ShoppingListManager
 
       data = JSON.parse(File.read(FILE))
       data.map { |i| Item.from_h(i) }
+    rescue JSON::ParserError
+      puts "Ошибка: файл данных повреждён. Начинаем с чистого списка."
+      []
     end
 
     def self.save(items)

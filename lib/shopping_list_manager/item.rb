@@ -14,6 +14,14 @@ module ShoppingListManager
       quantity * price
     end
 
+    def formatted_price
+      "%.2f" % price
+    end
+
+    def formatted_total
+      "%.2f" % total
+    end
+
     def to_h
       {
         id: id,
