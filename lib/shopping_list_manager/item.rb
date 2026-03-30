@@ -61,13 +61,13 @@ module ShoppingListManager
       }
     end
 
-    def self.from_h(_hash)
+    def self.from_h(hash)
       new(
-        id: h['id'],
-        name: h['name'],
-        quantity: h['quantity'],
-        price: h['price'],
-        bought: h['bought']
+        id: hash['id'],
+        name: hash['name'],
+        quantity: hash['quantity'],
+        price: hash['price'],
+        bought: hash['bought']
       )
     end
   end
