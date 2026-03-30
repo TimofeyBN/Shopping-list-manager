@@ -25,10 +25,20 @@ bundle install
 ##  Использование
 
 ### Добавить товар
+#### Можно написать сохранение покупки в файл сo своим названием
+
+```
+bundle exec ruby bin/shopping add "Яблоки" --quantity 3 --price 67.99 --file mylist.json
+```
+
+#### Или сохраненить в файл с именем по умолчанию data.json
 
 ```
 bundle exec ruby bin/shopping add "Яблоки" --quantity 3 --price 67.99
 ```
+
+### В дальнейшем все команды (list, buy, delete, total) будут использовать тот же файл, если указать --file mylist.json. 
+### Если --file не указан — используется data.json
 
 ### Показать список
 
@@ -53,6 +63,7 @@ bundle exec ruby bin/shopping delete 1
 ```
 bundle exec ruby bin/shopping total
 ```
+
 
 
 ##  Пример
