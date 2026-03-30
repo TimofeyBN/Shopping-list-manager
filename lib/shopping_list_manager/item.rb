@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module ShoppingListManager
+  # Класс Item для предмета который можно купить и использовать в покупке
   class Item
     attr_accessor :id, :name, :quantity, :price, :bought
 
@@ -60,7 +61,7 @@ module ShoppingListManager
       }
     end
 
-    def self.from_h(h)
+    def self.from_h(_hash)
       new(
         id: h['id'],
         name: h['name'],

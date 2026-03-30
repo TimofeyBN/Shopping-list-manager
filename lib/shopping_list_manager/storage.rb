@@ -4,21 +4,22 @@ require 'json'
 require_relative 'item'
 
 module ShoppingListManager
+  # Класс Storage для сохранения и обработки покупки в файл .json
   class Storage
-    FILE = 'data.json'
+    DEFAULT_FILE = 'data.json'
 
-    def self.load
-      return [] unless File.exist?(FILE)
+    def self.load(file = DEFAULT_FILE)
+      return [] unless File.exist?(file)
 
-      data = JSON.parse(File.read(FILE))
+      data = JSON.parse(File.read(file))
       data.map { |i| Item.from_h(i) }
     rescue JSON::ParserError
       puts 'Ошибка: файл данных повреждён. Начинаем с чистого списка.'
       []
     end
 
-    def self.save(items)
-      File.write(FILE, JSON.pretty_generate(items.map(&:to_h)))
+    def self.save(items, file = DEFAULT_FILE)
+      File.write(file, JSON.pretty_generate(items.map(&:to_h)))
     end
 
     def self.next_id(items)

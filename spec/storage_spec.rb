@@ -54,4 +54,19 @@ RSpec.describe ShoppingListManager::Storage do
     expect(stats[:total_quantity]).to eq(3)
     expect(stats[:bought_count]).to eq(0)
   end
+
+  describe '.load и .save с кастомным файлом' do
+    let(:file) { 'test_data.json' }
+    after { FileUtils.rm_f(file) }
+
+    it 'сохраняет и загружает данные из указанного файла' do
+      items = []
+      described_class.add_or_update(items, 'Milk', 2, 1.5)
+      described_class.save(items, file)
+
+      loaded_items = described_class.load(file)
+      expect(loaded_items.size).to eq(1)
+      expect(loaded_items.first.name).to eq('Milk')
+    end
+  end
 end

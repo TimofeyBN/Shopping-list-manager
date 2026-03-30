@@ -36,4 +36,28 @@ RSpec.describe ShoppingListManager::Item do
     item = described_class.new(id: 1, name: 'Milk', quantity: 1, price: 2)
     expect(item.bought?).to be false
   end
+
+  it 'отмечает как купленный' do
+    item = described_class.new(id: 1, name: 'Milk', quantity: 1, price: 2)
+    item.mark_as_bought!
+    expect(item.bought?).to be true
+  end
+
+  it 'валидирует корректность данных' do
+    item = described_class.new(id: 1, name: 'Milk', quantity: 1, price: 2)
+    expect(item.valid?).to be true
+
+    item2 = begin
+      described_class.new(id: 2, name: '', quantity: 1, price: 2)
+    rescue StandardError
+      nil
+    end
+    expect(item2).to be_nil
+  end
+
+  it 'сравнивает имена без учета регистра' do
+    item = described_class.new(id: 1, name: 'Milk', quantity: 1, price: 2)
+    expect(item.same?('MILK', 2)).to be true
+    expect(item.same?('Milk', 3)).to be false
+  end
 end

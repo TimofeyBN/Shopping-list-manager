@@ -3,6 +3,7 @@
 Gem::Specification.new do |spec|
   spec.name          = 'shopping_list_manager'
   spec.version       = '0.1.0'
+  spec.required_ruby_version = '>= 3.0'
   spec.summary       = 'CLI shopping list manager'
   spec.authors       = ['Batrakov Timofey']
   spec.files         = Dir['lib/**/*.rb']

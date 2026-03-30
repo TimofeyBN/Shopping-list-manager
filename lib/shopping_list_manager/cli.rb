@@ -5,11 +5,13 @@ require_relative 'storage'
 require_relative 'version'
 
 module ShoppingListManager
+  # Command Line Iterfase для управления списком покупок через командную строку
   class CLI
     COMMANDS = %w[add list buy delete total help].freeze
 
     def self.run(args)
-      items = Storage.load
+      file = extract_arg(args, '--file') || Storage::DEFAULT_FILE
+      items = Storage.load(file)
       command = args.shift
 
       case command
@@ -36,7 +38,7 @@ module ShoppingListManager
         print_help
       end
 
-      Storage.save(items)
+      Storage.save(items, file)
     end
 
     def self.extract_arg(args, flag)
